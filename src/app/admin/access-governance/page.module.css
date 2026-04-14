@@ -232,12 +232,241 @@
   color: var(--text-muted);
 }
 
+.table tbody tr {
+  cursor: pointer;
+}
+
+.selectedMaskRow {
+  background: rgb(252 117 120 / 10%);
+}
+
 .statusChip {
   border-radius: 9999px;
   background: rgb(65 164 101 / 18%);
   color: #93d8ad;
   padding: 0.18rem 0.5rem;
   font-size: 0.72rem;
+}
+
+.filterChip {
+  border-radius: 9999px;
+  background: rgb(95 132 255 / 18%);
+  color: #bacbff;
+  padding: 0.18rem 0.5rem;
+  font-size: 0.72rem;
+}
+
+.smallChip {
+  border-radius: 9999px;
+  padding: 0.18rem 0.5rem;
+  font-size: 0.72rem;
+}
+
+.visibilityVisible {
+  background: rgb(65 164 101 / 18%);
+  color: #93d8ad;
+}
+
+.visibilityMasked {
+  background: rgb(205 145 52 / 20%);
+  color: #e7be84;
+}
+
+.visibilityHidden {
+  background: rgb(193 78 79 / 18%);
+  color: #f0a2a4;
+}
+
+.piiPII {
+  background: rgb(193 78 79 / 18%);
+  color: #f0a2a4;
+}
+
+.piiNonPII {
+  background: rgb(126 126 133 / 20%);
+  color: #c4c4ca;
+}
+
+.smallChipDanger {
+  border-radius: 9999px;
+  padding: 0.18rem 0.5rem;
+  font-size: 0.72rem;
+  background: rgb(193 78 79 / 18%);
+  color: #f0a2a4;
+}
+
+.maskingFilters {
+  border: 0.0625rem solid var(--line);
+  border-radius: 0.65rem;
+  background: #141418;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr auto;
+  gap: 0.5rem;
+  padding: 0.5rem;
+}
+
+.maskingFilters select,
+.searchWrap input {
+  min-height: 2rem;
+  border: 0.0625rem solid var(--line);
+  border-radius: 0.5rem;
+  background: transparent;
+  color: var(--text);
+  padding: 0 0.6rem;
+}
+
+.searchWrap {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  border: 0.0625rem solid var(--line);
+  border-radius: 0.5rem;
+  padding: 0 0.4rem;
+}
+
+.searchWrap svg {
+  width: 0.9rem;
+  height: 0.9rem;
+  color: var(--text-muted);
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+}
+
+.searchWrap input {
+  border: none;
+  outline: none;
+}
+
+.piiOnlyToggle {
+  border: 0.0625rem solid rgb(252 117 120 / 40%);
+  border-radius: 0.5rem;
+  background: rgb(252 117 120 / 12%);
+  color: #ffb8ba;
+  min-height: 2rem;
+  padding: 0 0.55rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.toggleKnob {
+  width: 1.5rem;
+  height: 1rem;
+  border-radius: 9999px;
+  background: rgb(255 255 255 / 35%);
+  position: relative;
+}
+
+.toggleKnob::after {
+  content: "";
+  position: absolute;
+  right: 0.1rem;
+  top: 0.1rem;
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: 9999px;
+  background: #fff;
+}
+
+.maskingLayout {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 1.2fr);
+  gap: 0.7rem;
+}
+
+.maskingTableWrap {
+  border: 0.0625rem solid var(--line);
+  border-radius: 0.7rem;
+  overflow: hidden;
+}
+
+.maskingPanel {
+  border: 0.0625rem solid var(--line);
+  border-radius: 0.7rem;
+  background: #17171a;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 0.7rem;
+}
+
+.maskingPanelHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.maskingPanelHeader h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.maskingPanel small {
+  color: var(--text-muted);
+}
+
+.maskingPanel label {
+  display: grid;
+  gap: 0.3rem;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+}
+
+.maskingPanel input,
+.maskingPanel select {
+  min-height: 2rem;
+  border: 0.0625rem solid var(--line);
+  border-radius: 0.5rem;
+  background: transparent;
+  color: var(--text);
+  padding: 0 0.55rem;
+}
+
+.switchRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.personaPills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.personaPill {
+  border-radius: 9999px;
+  padding: 0.18rem 0.48rem;
+  font-size: 0.72rem;
+  background: rgb(95 132 255 / 18%);
+  color: #bacbff;
+}
+
+.addPill {
+  border: 0.0625rem dashed var(--line);
+  border-radius: 9999px;
+  padding: 0.16rem 0.45rem;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 0.72rem;
+}
+
+.maskedPersonaBox p {
+  margin: 0 0 0.35rem;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+}
+
+.maskingPanelFooter {
+  margin-top: auto;
+  border-top: 0.0625rem solid var(--line);
+  padding-top: 0.65rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .tableAction {
@@ -254,6 +483,117 @@
   inset: 0;
   display: grid;
   place-items: center;
+}
+
+.drawerLayer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.drawerOverlay {
+  position: absolute;
+  inset: 0;
+  background: rgb(0 0 0 / 45%);
+  pointer-events: auto;
+}
+
+.ruleDrawer {
+  position: absolute;
+  top: 3.4rem;
+  right: 0;
+  width: 25rem;
+  height: calc(100% - 3.4rem);
+  background: #18181c;
+  border-left: 0.0625rem solid var(--line);
+  display: flex;
+  flex-direction: column;
+  pointer-events: auto;
+}
+
+.ruleDrawerHeader {
+  min-height: 3rem;
+  border-bottom: 0.0625rem solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 0.85rem;
+}
+
+.ruleDrawerHeader h2 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.ruleDrawerHeader button {
+  width: 1.4rem;
+  height: 1.4rem;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+}
+
+.ruleDrawerBody {
+  padding: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.ruleDrawerBody label {
+  display: grid;
+  gap: 0.35rem;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+}
+
+.ruleDrawerBody input,
+.ruleDrawerBody select {
+  min-height: 2.1rem;
+  border: 0.0625rem solid var(--line);
+  border-radius: 0.5rem;
+  background: transparent;
+  color: var(--text);
+  padding: 0.45rem 0.6rem;
+}
+
+.drawerHint {
+  border: 0.0625rem solid rgb(95 132 255 / 40%);
+  background: rgb(95 132 255 / 12%);
+  color: #bacbff;
+  border-radius: 0.55rem;
+  padding: 0.65rem;
+  font-size: 0.8rem;
+}
+
+.ruleDrawerFooter {
+  margin-top: auto;
+  min-height: 3rem;
+  border-top: 0.0625rem solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 0.85rem;
+}
+
+.emptyState {
+  border: 0.0625rem solid var(--line);
+  border-radius: 0.7rem;
+  background: #141418;
+  min-height: 9rem;
+  display: grid;
+  place-items: center;
+  color: var(--text-muted);
+}
+
+@media (max-width: 72rem) {
+  .maskingFilters {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .maskingLayout {
+    grid-template-columns: 1fr;
+  }
 }
 
 .modalOverlay {

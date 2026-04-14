@@ -77,8 +77,95 @@ const rows = [
   },
 ];
 
+const maskingFields = [
+  {
+    id: "student_id",
+    fieldName: "student_id",
+    source: "users",
+    dataType: "UUID",
+    visibility: "Visible",
+    pii: "Non-PII",
+    personas: ["None"],
+  },
+  {
+    id: "email",
+    fieldName: "email",
+    source: "users",
+    dataType: "String",
+    visibility: "Masked",
+    pii: "PII",
+    personas: ["Student", "Faculty"],
+  },
+  {
+    id: "aadhaar_number",
+    fieldName: "aadhaar_number",
+    source: "kyc_records",
+    dataType: "String",
+    visibility: "Hidden",
+    pii: "PII",
+    personas: ["Student", "Faculty", "Dept Head"],
+  },
+  {
+    id: "salary_band",
+    fieldName: "salary_band",
+    source: "hr_data",
+    dataType: "Enum",
+    visibility: "Masked",
+    pii: "PII",
+    personas: ["Admin Staff"],
+  },
+  {
+    id: "last_login",
+    fieldName: "last_login",
+    source: "sessions",
+    dataType: "Timestamp",
+    visibility: "Visible",
+    pii: "Non-PII",
+    personas: ["None"],
+  },
+];
+
 export default function AccessGovernancePage() {
+  const [activeTab, setActiveTab] = useState<"policies" | "row-rules" | "masking">(
+    "policies",
+  );
   const [openPolicyModal, setOpenPolicyModal] = useState(false);
+  const [openRuleDrawer, setOpenRuleDrawer] = useState(false);
+  const [selectedFieldId, setSelectedFieldId] = useState("email");
+  const rowRules = [
+    {
+      role: "student_default",
+      scopeField: "student_id",
+      pattern: "{{user.id}}",
+      filter: "Exact Match",
+    },
+    {
+      role: "faculty_base",
+      scopeField: "department_id",
+      pattern: "{{user.department}}",
+      filter: "Exact Match",
+    },
+    {
+      role: "admin_staff",
+      scopeField: "org_unit",
+      pattern: "{{user.org_unit}}.*",
+      filter: "Regex",
+    },
+    {
+      role: "it_head",
+      scopeField: "*",
+      pattern: "*",
+      filter: "Wildcard",
+    },
+    {
+      role: "executive",
+      scopeField: "data_class",
+      pattern: "in:[confidential,restricted]",
+      filter: "In-List",
+    },
+  ];
+  const selectedField =
+    maskingFields.find((field) => field.id === selectedFieldId) ?? maskingFields[0];
 
   return (
     <div className={styles.page}>
@@ -141,51 +228,250 @@ export default function AccessGovernancePage() {
           </div>
 
           <div className={styles.tabs}>
-            <button type="button" className={styles.tabActive} onClick={() => setOpenPolicyModal(true)}>
+            <button
+              type="button"
+              className={activeTab === "policies" ? styles.tabActive : ""}
+              onClick={() => setActiveTab("policies")}
+            >
               Role Policies
             </button>
-            <button type="button">Row-Level Rules</button>
-            <button type="button">Field Masking</button>
+            <button
+              type="button"
+              className={activeTab === "row-rules" ? styles.tabActive : ""}
+              onClick={() => setActiveTab("row-rules")}
+            >
+              Row-Level Rules
+            </button>
+            <button
+              type="button"
+              className={activeTab === "masking" ? styles.tabActive : ""}
+              onClick={() => setActiveTab("masking")}
+            >
+              Field Masking
+            </button>
           </div>
 
-          <div className={styles.tableWrap}>
-            <table className={styles.table}>
-              <thead>
-                <tr>
-                  <th>Role Key</th>
-                  <th>Allowed Domains</th>
-                  <th>Masking Level</th>
-                  <th>Scope Type</th>
-                  <th>Biz Hours</th>
-                  <th>MFA Req.</th>
-                  <th>Status</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {rows.map((row) => (
-                  <tr key={row.role}>
-                    <td>{row.role}</td>
-                    <td>{row.domains}</td>
-                    <td>{row.mask}</td>
-                    <td>{row.scope}</td>
-                    <td>{row.hours}</td>
-                    <td>{row.mfa}</td>
-                    <td>
-                      <span className={styles.statusChip}>{row.status}</span>
-                    </td>
-                    <td>
-                      <button type="button" className={styles.tableAction}>
-                        <svg viewBox="0 0 24 24" aria-hidden="true">
-                          <path d="M4 20h4l10-10-4-4L4 16zM13 7l4 4" />
-                        </svg>
-                      </button>
-                    </td>
+          {activeTab === "policies" ? (
+            <div className={styles.tableWrap}>
+              <table className={styles.table}>
+                <thead>
+                  <tr>
+                    <th>Role Key</th>
+                    <th>Allowed Domains</th>
+                    <th>Masking Level</th>
+                    <th>Scope Type</th>
+                    <th>Biz Hours</th>
+                    <th>MFA Req.</th>
+                    <th>Status</th>
+                    <th>Actions</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                </thead>
+                <tbody>
+                  {rows.map((row) => (
+                    <tr key={row.role}>
+                      <td>{row.role}</td>
+                      <td>{row.domains}</td>
+                      <td>{row.mask}</td>
+                      <td>{row.scope}</td>
+                      <td>{row.hours}</td>
+                      <td>{row.mfa}</td>
+                      <td>
+                        <span className={styles.statusChip}>{row.status}</span>
+                      </td>
+                      <td>
+                        <button type="button" className={styles.tableAction} onClick={() => setOpenPolicyModal(true)}>
+                          <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M4 20h4l10-10-4-4L4 16zM13 7l4 4" />
+                          </svg>
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          ) : null}
+
+          {activeTab === "row-rules" ? (
+            <div className={styles.tableWrap}>
+              <table className={styles.table}>
+                <thead>
+                  <tr>
+                    <th>Role Key</th>
+                    <th>Scope Field</th>
+                    <th>Scope Value Pattern</th>
+                    <th>Filter Type</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {rowRules.map((rule) => (
+                    <tr key={`${rule.role}-${rule.scopeField}`}>
+                      <td>{rule.role}</td>
+                      <td>{rule.scopeField}</td>
+                      <td>{rule.pattern}</td>
+                      <td>
+                        <span className={styles.filterChip}>{rule.filter}</span>
+                      </td>
+                      <td>
+                        <button
+                          type="button"
+                          className={styles.tableAction}
+                          onClick={() => setOpenRuleDrawer(true)}
+                          aria-label="Edit row-level rule"
+                        >
+                          <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M4 20h4l10-10-4-4L4 16zM13 7l4 4" />
+                          </svg>
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          ) : null}
+
+          {activeTab === "masking" ? (
+            <>
+              <div className={styles.maskingFilters}>
+                <label className={styles.searchWrap}>
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <circle cx="11" cy="11" r="6" />
+                    <path d="m16 16 4 4" />
+                  </svg>
+                  <input type="text" placeholder="Search fields..." />
+                </label>
+                <select defaultValue="all-source">
+                  <option value="all-source">Source: All</option>
+                  <option>users</option>
+                  <option>kyc_records</option>
+                  <option>hr_data</option>
+                  <option>sessions</option>
+                </select>
+                <select defaultValue="all-visibility">
+                  <option value="all-visibility">Visibility: All</option>
+                  <option>Visible</option>
+                  <option>Masked</option>
+                  <option>Hidden</option>
+                </select>
+                <button type="button" className={styles.piiOnlyToggle}>
+                  <span>PII Only</span>
+                  <span className={styles.toggleKnob} />
+                </button>
+              </div>
+
+              <div className={styles.maskingLayout}>
+                <div className={styles.maskingTableWrap}>
+                  <table className={styles.table}>
+                    <thead>
+                      <tr>
+                        <th>Field Name</th>
+                        <th>Data Source</th>
+                        <th>Data Type</th>
+                        <th>Visibility</th>
+                        <th>PII</th>
+                        <th>Masked For Personas</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {maskingFields.map((field) => (
+                        <tr
+                          key={field.id}
+                          className={selectedFieldId === field.id ? styles.selectedMaskRow : ""}
+                          onClick={() => setSelectedFieldId(field.id)}
+                        >
+                          <td>{field.fieldName}</td>
+                          <td>{field.source}</td>
+                          <td>{field.dataType}</td>
+                          <td>
+                            <span className={`${styles.smallChip} ${styles[`visibility${field.visibility}`]}`}>
+                              {field.visibility}
+                            </span>
+                          </td>
+                          <td>
+                            <span className={`${styles.smallChip} ${styles[`pii${field.pii.replace("-", "")}`]}`}>
+                              {field.pii}
+                            </span>
+                          </td>
+                          <td>
+                            <div className={styles.personaPills}>
+                              {field.personas.map((persona) => (
+                                <span key={persona} className={styles.personaPill}>
+                                  {persona}
+                                </span>
+                              ))}
+                            </div>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+
+                <aside className={styles.maskingPanel}>
+                  <header className={styles.maskingPanelHeader}>
+                    <h3>{selectedField.fieldName}</h3>
+                    <span className={styles.smallChipDanger}>PII</span>
+                  </header>
+                  <small>
+                    {selectedField.source} · {selectedField.dataType} ·{" "}
+                    {selectedField.pii === "PII" ? "PII field" : "Non-PII field"}
+                  </small>
+                  <label>
+                    Visibility
+                    <select defaultValue={selectedField.visibility}>
+                      <option>Visible</option>
+                      <option>Masked</option>
+                      <option>Hidden</option>
+                    </select>
+                  </label>
+                  <label>
+                    Data Type
+                    <select defaultValue={selectedField.dataType}>
+                      <option>UUID</option>
+                      <option>String</option>
+                      <option>Enum</option>
+                      <option>Timestamp</option>
+                    </select>
+                  </label>
+                  <div className={styles.switchRow}>
+                    <span>Mark as PII</span>
+                    <button type="button" className={styles.toggleOn}>
+                      Enabled
+                    </button>
+                  </div>
+                  <div className={styles.switchRow}>
+                    <span>Apply Tokenisation</span>
+                    <button type="button" className={styles.toggleOn}>
+                      Enabled
+                    </button>
+                  </div>
+                  <div className={styles.maskedPersonaBox}>
+                    <p>Masked For Personas</p>
+                    <div className={styles.personaPills}>
+                      {selectedField.personas.map((persona) => (
+                        <span key={persona} className={styles.personaPill}>
+                          {persona}
+                        </span>
+                      ))}
+                      <button type="button" className={styles.addPill}>
+                        + Add
+                      </button>
+                    </div>
+                  </div>
+                  <footer className={styles.maskingPanelFooter}>
+                    <button type="button" className={styles.cancelBtn}>
+                      Discard
+                    </button>
+                    <button type="button" className={styles.saveBtn}>
+                      Update Field Policy
+                    </button>
+                  </footer>
+                </aside>
+              </div>
+            </>
+          ) : null}
         </section>
 
         {openPolicyModal ? (
@@ -238,6 +524,62 @@ export default function AccessGovernancePage() {
                 </button>
               </footer>
             </section>
+          </div>
+        ) : null}
+
+        {openRuleDrawer ? (
+          <div className={styles.drawerLayer}>
+            <div className={styles.drawerOverlay} onClick={() => setOpenRuleDrawer(false)} />
+            <aside className={styles.ruleDrawer}>
+              <header className={styles.ruleDrawerHeader}>
+                <h2>Edit Row-Level Rule</h2>
+                <button type="button" onClick={() => setOpenRuleDrawer(false)} aria-label="Close drawer">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="m6 6 12 12M18 6 6 18" />
+                  </svg>
+                </button>
+              </header>
+              <div className={styles.ruleDrawerBody}>
+                <label>
+                  Role Key
+                  <select defaultValue="faculty_base">
+                    <option>student_default</option>
+                    <option>faculty_base</option>
+                    <option>admin_staff</option>
+                    <option>it_head</option>
+                    <option>executive</option>
+                  </select>
+                </label>
+                <label>
+                  Scope Field
+                  <input defaultValue="department_id" />
+                </label>
+                <label>
+                  Scope Value Pattern
+                  <input defaultValue="{{user.department}}" />
+                </label>
+                <label>
+                  Filter Type
+                  <select defaultValue="Exact Match">
+                    <option>Exact Match</option>
+                    <option>Regex</option>
+                    <option>Wildcard</option>
+                    <option>In-List</option>
+                  </select>
+                </label>
+                <div className={styles.drawerHint}>
+                  Use {"{{user.X}}"} to bind row filters to the session context.
+                </div>
+              </div>
+              <footer className={styles.ruleDrawerFooter}>
+                <button type="button" className={styles.cancelBtn} onClick={() => setOpenRuleDrawer(false)}>
+                  Cancel
+                </button>
+                <button type="button" className={styles.saveBtn}>
+                  Save Rule
+                </button>
+              </footer>
+            </aside>
           </div>
         ) : null}
       </main>
