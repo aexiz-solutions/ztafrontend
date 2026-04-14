@@ -6,6 +6,7 @@ import styles from "./page.module.css";
 const navItems = [
   {
     label: "New chat",
+    href: "/",
     icon: (
       <svg viewBox="0 0 24 24" aria-hidden="true">
         <path d="M12 5v14M5 12h14" />
@@ -14,6 +15,7 @@ const navItems = [
   },
   {
     label: "Search",
+    href: "#",
     icon: (
       <svg viewBox="0 0 24 24" aria-hidden="true">
         <circle cx="11" cy="11" r="6" />
@@ -23,6 +25,7 @@ const navItems = [
   },
   {
     label: "Settings",
+    href: "/settings",
     icon: (
       <svg viewBox="0 0 24 24" aria-hidden="true">
         <circle cx="12" cy="12" r="3.2" />
@@ -56,7 +59,7 @@ export default function Home() {
 
         <nav className={styles.nav} aria-label="Primary navigation">
           {navItems.map((item) => (
-            <a key={item.label} href="#" className={styles.navItem}>
+            <a key={item.label} href={item.href} className={styles.navItem}>
               <span className={styles.navIcon}>{item.icon}</span>
               <span className={styles.navLabel}>{item.label}</span>
             </a>
