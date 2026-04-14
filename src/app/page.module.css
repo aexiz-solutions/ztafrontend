@@ -1,0 +1,264 @@
+.page {
+  --surface: #17171a;
+  --surface-alt: #202024;
+  --surface-chat: #1d1d1f;
+  --line: #2a2a2e;
+  --text: #efefef;
+  --text-muted: #a2a2ab;
+  --brand: #f67c78;
+
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 20% 80%;
+  font-family: var(--font-geist-sans);
+  background: radial-gradient(circle at top, #232329, #151518 55%);
+  color: var(--text);
+  transition: grid-template-columns 240ms ease;
+}
+
+.sidebar {
+  background: linear-gradient(to bottom, #1a1a1d, #161619);
+  border-right: 0.0625rem solid var(--line);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.sidebarTop {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+}
+
+.iconButton {
+  border: none;
+  border-radius: 0.5rem;
+  background: transparent;
+  color: var(--text-muted);
+  width: 2rem;
+  aspect-ratio: 1 / 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 180ms ease, color 180ms ease;
+}
+
+.iconButton svg {
+  width: 1rem;
+  aspect-ratio: 1 / 1;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.iconButton:hover {
+  background: var(--surface-alt);
+  color: var(--text);
+}
+
+.brand {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--brand);
+  letter-spacing: 0.04em;
+  text-transform: lowercase;
+  transition: opacity 220ms ease;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0 0.6rem 1rem;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  color: var(--text-muted);
+  padding: 0.6rem;
+  border-radius: 0.7rem;
+  transition: background-color 180ms ease, color 180ms ease, gap 220ms ease;
+}
+
+.navItem:hover {
+  background: var(--surface-alt);
+  color: var(--text);
+}
+
+.navIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.2rem;
+  aspect-ratio: 1 / 1;
+  flex-shrink: 0;
+}
+
+.navIcon svg {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.navLabel {
+  font-size: 0.92rem;
+  font-weight: 550;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  opacity: 1;
+  transition: opacity 200ms ease;
+}
+
+.chatSection {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.chatHeader {
+  padding: 1rem 1.5rem;
+  border-bottom: 0.0625rem solid var(--line);
+  font-size: 1rem;
+  font-weight: 600;
+  color: #c7c7cd;
+}
+
+.chatBody {
+  flex: 1;
+  display: grid;
+  place-items: center;
+  padding: 2rem;
+}
+
+.messageCard {
+  width: min(100%, 40rem);
+  background: var(--surface-chat);
+  border: 0.0625rem solid var(--line);
+  border-radius: 1rem;
+  padding: 1.25rem;
+}
+
+.messageCard h1 {
+  font-size: 1.15rem;
+  margin-bottom: 0.6rem;
+}
+
+.messageCard p {
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+
+.sidebarFooter {
+  margin-top: auto;
+  border-top: 0.0625rem solid var(--line);
+  padding: 0.35rem;
+}
+
+.profileCard {
+  width: 100%;
+  border: none;
+  background: transparent;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.6rem;
+  border-radius: 0.75rem;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 180ms ease;
+}
+
+.profileCard:hover {
+  background: var(--surface-alt);
+}
+
+.profileAvatar {
+  width: 2rem;
+  aspect-ratio: 1 / 1;
+  border-radius: 9999px;
+  background: #d0cec2;
+  color: #1f1f1f;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+
+.profileMeta {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.profileName {
+  font-size: 0.95rem;
+  font-weight: 550;
+}
+
+.profilePlan {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.collapsed {
+  grid-template-columns: max-content 1fr;
+}
+
+.collapsed .sidebarTop {
+  justify-content: center;
+}
+
+.collapsed .brand,
+.collapsed .navLabel,
+.collapsed .profileMeta {
+  opacity: 0;
+  width: 0;
+}
+
+.collapsed .navItem {
+  justify-content: center;
+  gap: 0;
+}
+
+.collapsed .profileCard {
+  justify-content: center;
+}
+
+@media (max-width: 56rem) {
+  .page {
+    grid-template-columns: max-content 1fr;
+  }
+
+  .brand,
+  .navLabel,
+  .profileMeta {
+    opacity: 0;
+    width: 0;
+  }
+
+  .sidebarTop {
+    justify-content: center;
+  }
+
+  .navItem {
+    justify-content: center;
+    gap: 0;
+  }
+
+  .profileCard {
+    justify-content: center;
+  }
+}
