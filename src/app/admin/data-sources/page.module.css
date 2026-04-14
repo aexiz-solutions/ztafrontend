@@ -8,7 +8,7 @@
 
   min-height: 100vh;
   display: grid;
-  grid-template-columns: 20% 80%;
+  grid-template-columns: 16% 84%;
   font-family: var(--font-geist-sans);
   background: radial-gradient(circle at top, #232329, #151518 55%);
   color: var(--text);
@@ -85,8 +85,8 @@
 }
 
 .navIcon {
-  width: 1.2rem;
-  height: 1.2rem;
+  width: 0.95rem;
+  height: 0.95rem;
   display: inline-flex;
 }
 
@@ -143,7 +143,7 @@
 }
 
 .header {
-  min-height: 3.5rem;
+  min-height: 3.4rem;
   border-bottom: 0.0625rem solid var(--line);
   display: flex;
   align-items: center;
@@ -154,6 +154,13 @@
 .breadcrumb {
   font-size: 0.9rem;
   color: var(--text-muted);
+}
+
+.headerUser {
+  border: 0.0625rem solid var(--line);
+  border-radius: 9999px;
+  padding: 0.3rem 0.55rem;
+  font-size: 0.82rem;
 }
 
 .createButton {

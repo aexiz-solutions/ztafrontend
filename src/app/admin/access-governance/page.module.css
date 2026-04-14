@@ -11,6 +11,12 @@
   font-family: var(--font-geist-sans);
 }
 
+.page button,
+.page input,
+.page select {
+  font: inherit;
+}
+
 .sidebar {
   background: linear-gradient(to bottom, #0f1013, #0a0b0f);
   border-right: 0.0625rem solid #1d1f24;
