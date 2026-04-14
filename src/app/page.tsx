@@ -77,12 +77,23 @@ export default function Home() {
       <main className={styles.chatSection}>
         <header className={styles.chatHeader}>ZTA-AI Assistant</header>
         <section className={styles.chatBody}>
-          <article className={styles.messageCard}>
-            <h1>Minimal chat interface</h1>
-            <p>
-              This is a clean placeholder for your chat area with an
-              aesthetic, bold, and consistent layout.
-            </p>
+          <article className={styles.idleState}>
+            <div className={styles.idleTitleRow}>
+              
+              <h1 className={styles.idleTitle}>What shall we think through?</h1>
+            </div>
+
+            <div className={styles.composer}>
+              <label className={styles.srOnly} htmlFor="chat-input">
+                Chat input
+              </label>
+              <input
+                id="chat-input"
+                className={styles.chatInput}
+                type="text"
+                placeholder="How can I help you today?"
+              />
+            </div>
           </article>
         </section>
       </main>
