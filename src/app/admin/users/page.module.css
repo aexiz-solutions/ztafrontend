@@ -1,0 +1,402 @@
+.page {
+  --surface: #17171a;
+  --surface-alt: #202024;
+  --line: #2a2a2e;
+  --text: #efefef;
+  --text-muted: #a2a2ab;
+  --brand: #fc7578;
+
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 20% 80%;
+  font-family: var(--font-geist-sans);
+  background: radial-gradient(circle at top, #232329, #151518 55%);
+  color: var(--text);
+}
+
+.sidebar {
+  background: linear-gradient(to bottom, #1a1a1d, #161619);
+  border-right: 0.0625rem solid var(--line);
+}
+
+.sidebarTop {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+}
+
+.iconButton {
+  border: none;
+  border-radius: 0.5rem;
+  background: transparent;
+  color: var(--text-muted);
+  width: 2rem;
+  aspect-ratio: 1 / 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.iconButton svg,
+.editAction svg {
+  width: 1rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.brand {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--brand);
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0 0.6rem 1rem;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--text-muted);
+  padding: 0.6rem;
+  border-radius: 0.7rem;
+}
+
+.navItemActive {
+  color: var(--text);
+  background: rgb(252 117 120 / 25%);
+}
+
+.navIcon {
+  width: 1.2rem;
+  height: 1.2rem;
+  display: inline-flex;
+}
+
+.navIcon svg {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+}
+
+.navLabel {
+  font-size: 0.92rem;
+  font-weight: 550;
+}
+
+.main {
+  min-width: 0;
+  position: relative;
+}
+
+.header {
+  min-height: 3.5rem;
+  border-bottom: 0.0625rem solid var(--line);
+  display: flex;
+  align-items: center;
+  padding: 0 1.5rem;
+}
+
+.title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.content {
+  padding: 1rem 1.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.filterBar {
+  border: 0.0625rem solid var(--line);
+  border-radius: 0.75rem;
+  background: #141418;
+  padding: 0.75rem;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr auto auto;
+  gap: 0.6rem;
+}
+
+.filterInput,
+.filterSelect {
+  width: 100%;
+  min-height: 2.25rem;
+  border: 0.0625rem solid var(--line);
+  border-radius: 0.55rem;
+  background: transparent;
+  color: var(--text);
+  padding: 0.45rem 0.6rem;
+}
+
+.statusToggle {
+  min-height: 2.25rem;
+  border: 0.0625rem solid var(--line);
+  border-radius: 0.55rem;
+  display: inline-flex;
+  overflow: hidden;
+}
+
+.statusToggle button {
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  padding: 0 0.7rem;
+}
+
+.toggleActive {
+  background: rgb(252 117 120 / 25%) !important;
+  color: var(--text) !important;
+}
+
+.applyButton,
+.saveButton {
+  border: none;
+  border-radius: 0.6rem;
+  min-height: 2.25rem;
+  padding: 0 0.85rem;
+  background: var(--brand);
+  color: #fff;
+  font-weight: 600;
+}
+
+.tableWrap {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  min-width: 60rem;
+  border-collapse: collapse;
+  border: 0.0625rem solid var(--line);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  background: #141418;
+}
+
+.table th,
+.table td {
+  padding: 0.7rem 0.65rem;
+  text-align: left;
+  border-bottom: 0.0625rem solid rgb(255 255 255 / 6%);
+  font-size: 0.85rem;
+}
+
+.table th {
+  color: #c6c1c8;
+  background: #1a1a20;
+}
+
+.table td {
+  color: var(--text-muted);
+}
+
+.nameCell {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.avatar {
+  width: 1.6rem;
+  aspect-ratio: 1 / 1;
+  border-radius: 9999px;
+  background: #3a3a40;
+  color: #f4f4f5;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+}
+
+.nameText {
+  color: var(--text);
+}
+
+.badge {
+  display: inline-flex;
+  padding: 0.2rem 0.5rem;
+  border-radius: 9999px;
+  font-size: 0.74rem;
+}
+
+.personaStudent {
+  background: rgb(82 160 255 / 18%);
+  color: #a6d0ff;
+}
+
+.personaFaculty {
+  background: rgb(159 119 255 / 20%);
+  color: #d3baff;
+}
+
+.personaDeptHead {
+  background: rgb(243 153 66 / 20%);
+  color: #f4c38c;
+}
+
+.personaAdminStaff {
+  background: rgb(252 117 120 / 20%);
+  color: #ffb8ba;
+}
+
+.personaExecutive {
+  background: rgb(80 189 171 / 20%);
+  color: #9ce2d5;
+}
+
+.personaITHead {
+  background: rgb(95 132 255 / 20%);
+  color: #bacbff;
+}
+
+.statusActive {
+  background: rgb(65 164 101 / 18%);
+  color: #93d8ad;
+}
+
+.statusInactive {
+  background: rgb(126 126 133 / 20%);
+  color: #c4c4ca;
+}
+
+.editAction {
+  opacity: 0;
+}
+
+.editAction a {
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 0.0625rem solid var(--line);
+  border-radius: 0.4rem;
+  color: #c2bbc3;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.table tr:hover .editAction,
+.showEdit .editAction {
+  opacity: 1;
+}
+
+.pagination {
+  border: 0.0625rem solid var(--line);
+  border-radius: 0.75rem;
+  background: #141418;
+  padding: 0.65rem 0.75rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--text-muted);
+}
+
+.pagination button {
+  border: 0.0625rem solid var(--line);
+  border-radius: 0.45rem;
+  background: transparent;
+  color: var(--text);
+  padding: 0.3rem 0.55rem;
+}
+
+.drawerLayer {
+  position: absolute;
+  inset: 3.5rem 0 0;
+  pointer-events: none;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgb(0 0 0 / 45%);
+  pointer-events: auto;
+}
+
+.drawer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 25rem;
+  height: 100%;
+  background: #18181c;
+  border-left: 0.0625rem solid var(--line);
+  display: flex;
+  flex-direction: column;
+  pointer-events: auto;
+}
+
+.drawerHeader {
+  min-height: 3.5rem;
+  border-bottom: 0.0625rem solid var(--line);
+  padding: 0 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.drawerHeader h2 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.closeLink {
+  color: var(--text-muted);
+  text-decoration: underline;
+}
+
+.drawerBody {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.drawerBody label {
+  display: grid;
+  gap: 0.35rem;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.drawerBody input,
+.drawerBody select {
+  min-height: 2.25rem;
+  border: 0.0625rem solid var(--line);
+  border-radius: 0.55rem;
+  background: transparent;
+  color: var(--text);
+  padding: 0.45rem 0.6rem;
+}
+
+.drawerFooter {
+  margin-top: auto;
+  border-top: 0.0625rem solid var(--line);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.cancelLink {
+  color: var(--text-muted);
+  text-align: center;
+  text-decoration: underline;
+}
+
+@media (max-width: 72rem) {
+  .filterBar {
+    grid-template-columns: 1fr 1fr;
+  }
+}
