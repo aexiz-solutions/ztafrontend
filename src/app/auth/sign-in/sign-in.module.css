@@ -1,0 +1,170 @@
+.screen {
+  --surface: #17171a;
+  --surface-alt: #202024;
+  --line: #2a2a2e;
+  --text: #efefef;
+  --text-muted: #a2a2ab;
+  --brand: #f67c78;
+
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  background: radial-gradient(circle at top, #232329, #151518 55%);
+  font-family: var(--font-geist-sans);
+  color: var(--text);
+}
+
+.card {
+  width: min(100%, 26.25rem);
+  border: 0.0625rem solid var(--line);
+  border-radius: 1rem;
+  background: var(--surface);
+  padding: 1.35rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  box-shadow: 0 1rem 2.4rem rgb(0 0 0 / 28%);
+}
+
+.brandWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+}
+
+.logo {
+  width: 1.6rem;
+  aspect-ratio: 1 / 1;
+  border-radius: 9999px;
+  border: 0.125rem solid var(--brand);
+  background: rgb(246 124 120 / 15%);
+}
+
+.wordmark {
+  text-transform: lowercase;
+  color: var(--brand);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  font-size: 1.2rem;
+}
+
+.title {
+  text-align: center;
+  font-size: 1.35rem;
+  font-weight: 600;
+}
+
+.providerStack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.providerBtn {
+  width: 100%;
+  min-height: 2.7rem;
+  border: 0.0625rem solid var(--line);
+  border-radius: 0.75rem;
+  background: transparent;
+  color: var(--text);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  font-weight: 550;
+  cursor: pointer;
+}
+
+.providerBtn:hover {
+  background: var(--surface-alt);
+}
+
+.icon {
+  width: 1.1rem;
+  height: 1.1rem;
+  flex-shrink: 0;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-size: 0.86rem;
+  color: var(--text-muted);
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  height: 0.0625rem;
+  background: var(--line);
+}
+
+.adminBlock {
+  border: 0.0625rem dashed #4b4b52;
+  border-radius: 0.75rem;
+  overflow: hidden;
+}
+
+.adminToggle {
+  width: 100%;
+  border: none;
+  background: rgb(162 162 171 / 8%);
+  color: var(--text-muted);
+  text-align: left;
+  padding: 0.7rem 0.8rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.adminBody {
+  padding: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  background: rgb(246 124 120 / 8%);
+}
+
+.input {
+  width: 100%;
+  min-height: 2.5rem;
+  border: 0.0625rem solid var(--line);
+  border-radius: 0.65rem;
+  background: transparent;
+  color: inherit;
+  padding: 0.55rem 0.65rem;
+}
+
+.mockButton {
+  width: 100%;
+  min-height: 2.6rem;
+  border: none;
+  border-radius: 0.65rem;
+  background: var(--brand);
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.errorPanel {
+  border: 0.0625rem solid rgb(191 74 75 / 45%);
+  border-radius: 0.75rem;
+  background: rgb(246 124 120 / 18%);
+  color: #d37476;
+  padding: 0.7rem 0.75rem;
+  font-size: 0.88rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 0.6rem;
+}
+
+.dismiss {
+  border: none;
+  background: transparent;
+  color: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
