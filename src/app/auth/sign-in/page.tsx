@@ -1,9 +1,11 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import styles from "./sign-in.module.css";
 
 export default function SignInPage() {
+  const router = useRouter();
   const [adminOpen, setAdminOpen] = useState(false);
   const [showError, setShowError] = useState(true);
 
@@ -18,7 +20,7 @@ export default function SignInPage() {
         <h1 className={styles.title}>Sign in to ZTA</h1>
 
         <div className={styles.providerStack}>
-          <button type="button" className={styles.providerBtn}>
+          <button type="button" className={styles.providerBtn} onClick={() => router.push("/")}> 
             <svg className={styles.icon} viewBox="0 0 24 24" aria-hidden="true">
               <path fill="currentColor" d="M21.8 12.23c0-.7-.06-1.38-.17-2.03H12v3.84h5.5a4.7 4.7 0 0 1-2.04 3.09v2.57h3.3c1.93-1.77 3.04-4.4 3.04-7.47Z" />
               <path fill="currentColor" d="M12 22c2.76 0 5.08-.92 6.77-2.5l-3.3-2.57c-.92.62-2.1.99-3.47.99-2.67 0-4.93-1.8-5.73-4.21H2.86v2.66A10 10 0 0 0 12 22Z" />
@@ -28,12 +30,12 @@ export default function SignInPage() {
             Continue with Google
           </button>
 
-          <button type="button" className={styles.providerBtn}>
+          <button type="button" className={styles.providerBtn} onClick={() => router.push("/admin")}> 
             <svg className={styles.icon} viewBox="0 0 24 24" aria-hidden="true">
               <path d="M7 11V8a5 5 0 1 1 10 0v3" fill="none" stroke="currentColor" strokeWidth="1.8" />
               <rect x="5" y="11" width="14" height="9" rx="2" fill="none" stroke="currentColor" strokeWidth="1.8" />
             </svg>
-            Continue with OIDC
+            Continue as Admin
           </button>
         </div>
 
@@ -47,8 +49,8 @@ export default function SignInPage() {
             <div className={styles.adminBody}>
               <input className={styles.input} placeholder="Username" />
               <input className={styles.input} type="password" placeholder="Password" />
-              <button type="button" className={styles.mockButton}>
-                Mock Login
+              <button type="button" className={styles.mockButton} onClick={() => router.push("/admin")}> 
+                Enter Admin
               </button>
             </div>
           ) : null}

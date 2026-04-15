@@ -1,5 +1,5 @@
 .page{--line:#2a2a2e;--text:#efefef;--text-muted:#a2a2ab;--brand:#fc7578;min-height:100vh;display:grid;grid-template-columns:16% 84%;background:radial-gradient(circle at top,#232329,#151518 55%);color:var(--text);font-family:var(--font-geist-sans)}
-.sidebar{background:linear-gradient(to bottom,#0f1013,#0a0b0f);border-right:.0625rem solid #1d1f24;display:flex;flex-direction:column}
+.sidebar{position:sticky;top:0;align-self:start;height:100vh;overflow-y:auto;background:linear-gradient(to bottom,#0f1013,#0a0b0f);border-right:.0625rem solid #1d1f24;display:flex;flex-direction:column}
 .adminBrand{min-height:3.4rem;border-bottom:.0625rem solid #1d1f24;display:flex;align-items:center;gap:.6rem;padding:0 .9rem}
 .brandShield{width:1.2rem;height:1.2rem;color:var(--brand)}
 .brandShield svg,.navIcon svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}

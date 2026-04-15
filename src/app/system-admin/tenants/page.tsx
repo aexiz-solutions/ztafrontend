@@ -1,9 +1,10 @@
 import Link from "next/link";
 import styles from "./page.module.css";
+import { CreateTenantFrame } from "./create-tenant-frame";
 
 const topNavLinks = [
   { label: "Tenants", href: "/system-admin/tenants", active: true },
-  { label: "Audit", href: "#" },
+  { label: "Audit", href: "/admin/audit-log" },
   { label: "Settings", href: "/settings" },
 ];
 
@@ -17,7 +18,16 @@ const tenants = [
   { name: "Helios Medical", domain: "@helios.health", subdomain: "helios", status: "Active", plan: "Enterprise", users: 963, claims: 44102, created: "2025-03-17" },
 ] as const;
 
-export default function TenantListPage() {
+type Props = {
+  searchParams?: Promise<{ frame?: string }>;
+};
+
+export default async function TenantListPage({ searchParams }: Props) {
+  const params = searchParams ? await searchParams : undefined;
+  if (params?.frame === "create") {
+    return <CreateTenantFrame />;
+  }
+
   return (
     <div className={styles.page}>
       <header className={styles.topNav}>
@@ -33,13 +43,14 @@ export default function TenantListPage() {
               </Link>
             ))}
           </nav>
-          <button type="button" className={styles.avatar} aria-label="User profile">
+          <Link href="/settings" className={styles.avatar} aria-label="User profile">
             SA
-          </button>
+          </Link>
         </div>
       </header>
 
       <main className={styles.main}>
+        <CreateTenantFrame />
         <section className={styles.contentCard}>
           <div className={styles.head}>
             <div>
@@ -52,7 +63,7 @@ export default function TenantListPage() {
                 ))}
               </div>
             </div>
-            <button type="button" className={styles.createBtn}>Create Tenant</button>
+            <Link href="/system-admin/tenants?frame=create" className={styles.createBtn}>Create Tenant</Link>
           </div>
 
           <div className={styles.tableWrap}>

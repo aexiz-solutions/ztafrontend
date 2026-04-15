@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import styles from "./page.module.css";
 
@@ -15,7 +16,7 @@ const navItems = [
   },
   {
     label: "Search",
-    href: "#",
+    href: "/admin/access-governance",
     icon: (
       <svg viewBox="0 0 24 24" aria-hidden="true">
         <circle cx="11" cy="11" r="6" />
@@ -59,15 +60,15 @@ export default function Home() {
 
         <nav className={styles.nav} aria-label="Primary navigation">
           {navItems.map((item) => (
-            <a key={item.label} href={item.href} className={styles.navItem}>
+            <Link key={item.label} href={item.href} className={styles.navItem}>
               <span className={styles.navIcon}>{item.icon}</span>
               <span className={styles.navLabel}>{item.label}</span>
-            </a>
+            </Link>
           ))}
         </nav>
 
         <div className={styles.sidebarFooter}>
-          <button type="button" className={styles.profileCard}>
+          <button type="button" className={styles.profileCard} onClick={() => (window.location.href = "/auth/sign-in")}>
             <span className={styles.profileAvatar}>V</span>
             <span className={styles.profileMeta}>
               <span className={styles.profileName}>vbg</span>

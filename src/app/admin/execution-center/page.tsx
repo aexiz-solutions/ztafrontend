@@ -1,28 +1,7 @@
 import Link from "next/link";
+import { AdminSidebar } from "../admin-sidebar";
 import styles from "./page.module.css";
 
-const adminNav = [
-  {
-    section: "Administration",
-    items: [
-      { label: "Dashboard", href: "#", icon: "M4 5h16v14H4zM4 10h16M9 5v14" },
-      { label: "Users", href: "/admin/users", icon: "M9 8a3 3 0 1 0 0-.01M3.5 18a6 6 0 0 1 11 0M16 8h5" },
-      { label: "Access Governance", href: "/admin/access-governance", icon: "M12 3 6 6v5c0 4.2 2.5 7 6 8 3.5-1 6-3.8 6-8V6z" },
-      { label: "Data Sources", href: "/admin/data-sources", icon: "M4 5h16v14H4zM4 10h16M9 5v14" },
-      { label: "Action Templates", href: "/admin/action-templates", icon: "M7 4h10v16H7zM10 8h4M10 12h4M10 16h4" },
-      { label: "Execution Center", href: "/admin/execution-center", icon: "M12 4v16M7 8h10M7 16h10", active: true },
-      { label: "Pipeline Monitor", href: "/admin/pipeline-monitor", icon: "M4 19h16M7 16V8M12 16V5M17 16v-6" },
-      { label: "Interpreter Config", href: "/admin/interpreter-config", icon: "M12 3v18M7 8h10M7 16h10" },
-    ],
-  },
-  {
-    section: "System",
-    items: [
-      { label: "Integrations", href: "#", icon: "M10 13a5 5 0 0 1 0-7l2-2a5 5 0 1 1 7 7l-1 1M14 11a5 5 0 0 1 0 7l-2 2a5 5 0 1 1-7-7l1-1" },
-      { label: "Settings", href: "/settings", icon: "M12 8.8a3.2 3.2 0 1 0 0 6.4 3.2 3.2 0 0 0 0-6.4Zm7.2 3.2-.09-1.09 1.68-1.3-1.6-2.77-2 .8a7.15 7.15 0 0 0-1.9-1.1l-.31-2.12h-3.2l-.31 2.12a7.15 7.15 0 0 0-1.9 1.1l-2-.8-1.6 2.77 1.68 1.3a7.2 7.2 0 0 0 0 2.18l-1.68 1.3 1.6 2.77 2-.8a7.15 7.15 0 0 0 1.9 1.1l.31 2.12h3.2l.31-2.12a7.15 7.15 0 0 0 1.9-1.1l2 .8 1.6-2.77-1.68-1.3c.06-.36.09-.72.09-1.09Z" },
-    ],
-  },
-];
 
 type Props = {
   searchParams?: Promise<{ modal?: "approve" | "rollback" }>;
@@ -34,25 +13,7 @@ export default async function ExecutionCenterPage({ searchParams }: Props) {
   const showRollback = params?.modal === "rollback";
   return (
     <div className={styles.page}>
-      <aside className={styles.sidebar}>
-        <div className={styles.adminBrand}>
-          <span className={styles.brandShield}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 6 6v5c0 4.2 2.5 7 6 8 3.5-1 6-3.8 6-8V6z" /></svg></span>
-          <span className={styles.brandText}>ZTA Admin</span>
-        </div>
-        {adminNav.map((group) => (
-          <section key={group.section} className={styles.navGroup}>
-            <p className={styles.groupTitle}>{group.section}</p>
-            <nav className={styles.nav}>
-              {group.items.map((item) => (
-                <Link key={item.label} href={item.href} className={`${styles.navItem} ${item.active ? styles.navItemActive : ""}`}>
-                  <span className={styles.navIcon}><svg viewBox="0 0 24 24" aria-hidden="true"><path d={item.icon} /></svg></span>
-                  <span className={styles.navLabel}>{item.label}</span>
-                </Link>
-              ))}
-            </nav>
-          </section>
-        ))}
-      </aside>
+      <AdminSidebar activeLabel="Execution Center" />
       <main className={styles.main}>
         <header className={styles.header}>
           <div className={styles.breadcrumb}>Admin / <strong>Execution Center</strong></div>
@@ -65,10 +26,10 @@ export default async function ExecutionCenterPage({ searchParams }: Props) {
               <label className={styles.label}>Select Action</label>
               <input defaultValue="revoke_session" />
               <div className={styles.templateList}>
-                <button type="button" className={styles.activeRow}>revoke_session</button>
-                <button type="button">send_otp_notification</button>
-                <button type="button">update_enrollment_status</button>
-                <button type="button">export_pii_report</button>
+                <Link href="/admin/execution-center" className={styles.activeRow}>revoke_session</Link>
+                <Link href="/admin/execution-center?template=send_otp_notification">send_otp_notification</Link>
+                <Link href="/admin/execution-center?template=update_enrollment_status">update_enrollment_status</Link>
+                <Link href="/admin/execution-center?template=export_pii_report">export_pii_report</Link>
               </div>
               <div className={styles.chipRow}><span className={styles.high}>High</span><span className={styles.irrev}>Irreversible</span></div>
               <div className={styles.warn}>Approval Required — this action will be queued for IT Head approval.</div>
@@ -76,7 +37,7 @@ export default async function ExecutionCenterPage({ searchParams }: Props) {
               <input defaultValue="usr_482fa19fc3" />
               <input defaultValue="Suspicious login from unrecognized device" />
               <label className={styles.switch}><input type="checkbox" defaultChecked /><span /> notify_user</label>
-              <button type="button" className={styles.cta}>Execute Action</button>
+              <Link href="/admin/execution-center?modal=approve" className={styles.cta}>Execute Action</Link>
             </article>
 
             <article className={styles.col}>
@@ -100,7 +61,7 @@ export default async function ExecutionCenterPage({ searchParams }: Props) {
               <div className={styles.actions}>
                 <Link href="/admin/execution-center?modal=approve" className={styles.goodBtn}>Approve</Link>
                 <Link href="/admin/execution-center?modal=rollback" className={styles.rollbackBtn}>Rollback</Link>
-                <button type="button" className={styles.neutral}>Escalations</button>
+                <Link href="/admin/audit-log?frame=dashboard" className={styles.neutral}>Escalations</Link>
               </div>
             </article>
           </div>
@@ -115,7 +76,7 @@ export default async function ExecutionCenterPage({ searchParams }: Props) {
             <input placeholder="Approval note (optional)" />
             <div className={styles.modalActions}>
               <Link href="/admin/execution-center" className={styles.neutral}>Cancel</Link>
-              <button type="button" className={styles.goodBtn}>Approve Execution</button>
+              <Link href="/admin/audit-log" className={styles.goodBtn}>Approve Execution</Link>
             </div>
           </div>
         </>
@@ -129,7 +90,7 @@ export default async function ExecutionCenterPage({ searchParams }: Props) {
             <input placeholder="Provide detailed reason for rollback..." />
             <div className={styles.modalActions}>
               <Link href="/admin/execution-center" className={styles.neutral}>Cancel</Link>
-              <button type="button" className={styles.rollbackBtn}>Confirm Rollback</button>
+              <Link href="/admin/execution-center" className={styles.rollbackBtn}>Confirm Rollback</Link>
             </div>
           </div>
         </>

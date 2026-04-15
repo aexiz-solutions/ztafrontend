@@ -18,6 +18,11 @@
 }
 
 .sidebar {
+  position: sticky;
+  top: 0;
+  align-self: start;
+  height: 100vh;
+  overflow-y: auto;
   background: linear-gradient(to bottom, #0f1013, #0a0b0f);
   border-right: 0.0625rem solid #1d1f24;
   display: flex;

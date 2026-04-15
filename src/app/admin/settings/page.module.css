@@ -1,0 +1,135 @@
+.page {
+  --line: #2a2a2e;
+  --text: #efefef;
+  --text-muted: #a2a2ab;
+  --brand: #fc7578;
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 16% 84%;
+  background: radial-gradient(circle at top, #232329, #151518 55%);
+  color: var(--text);
+  font-family: var(--font-geist-sans);
+}
+
+.main {
+  min-width: 0;
+  padding: 1.35rem;
+}
+
+.header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  margin-bottom: 0.35rem;
+}
+
+.header h1 {
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  line-height: 1.05;
+}
+
+.headerBadge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.2rem;
+  padding: 0 0.7rem;
+  border-radius: 9999px;
+  border: 0.0625rem solid rgba(252, 117, 120, 0.35);
+  background: rgb(252 117 120 / 15%);
+  color: #f6c9cb;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.panelGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.85rem;
+}
+
+.card {
+  border: 0.0625rem solid var(--line);
+  border-radius: 0.85rem;
+  background: #141418;
+  padding: 1rem;
+}
+
+.card h2 {
+  margin-bottom: 0.35rem;
+  font-size: 1rem;
+}
+
+.card p {
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.rowList {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 0.9rem;
+}
+
+.rowList span {
+  display: block;
+  color: var(--text-muted);
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.25rem;
+}
+
+.rowList strong {
+  color: var(--text);
+  font-size: 0.95rem;
+}
+
+.actionRow {
+  display: flex;
+  gap: 0.6rem;
+  margin-top: 0.9rem;
+  flex-wrap: wrap;
+}
+
+.primaryBtn,
+.secondaryBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.45rem;
+  padding: 0 0.95rem;
+  border-radius: 0.8rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.primaryBtn {
+  background: var(--brand);
+  color: #fff;
+}
+
+.secondaryBtn {
+  border: 0.0625rem solid var(--line);
+  background: transparent;
+  color: var(--text);
+}
+
+@media (max-width: 64rem) {
+  .page {
+    grid-template-columns: 1fr;
+  }
+
+  .panelGrid {
+    grid-template-columns: 1fr;
+  }
+}

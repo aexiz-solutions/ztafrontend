@@ -20,7 +20,7 @@ const navItems = [
   },
   {
     label: "Search",
-    href: "#",
+    href: "/admin/access-governance",
     icon: (
       <svg viewBox="0 0 24 24" aria-hidden="true">
         <circle cx="11" cy="11" r="6" />
@@ -110,7 +110,7 @@ export default function SettingsPage() {
         ) : null}
 
         <div className={styles.sidebarFooter}>
-          <button type="button" className={styles.profileCard}>
+          <button type="button" className={styles.profileCard} onClick={() => router.push("/auth/sign-in")}>
             <span className={styles.profileAvatar}>V</span>
             {!collapsed ? (
               <span className={styles.profileMeta}>
@@ -229,8 +229,8 @@ export default function SettingsPage() {
                 <h2>About</h2>
                 <div className={styles.aboutList}>
                   <p>Version: 0.1.0</p>
-                  <a href="#">Terms of Service</a>
-                  <a href="#">Privacy Policy</a>
+                  <Link href="/admin/compliance-center?tab=summary">Terms of Service</Link>
+                  <Link href="/admin/compliance-center?tab=retention">Privacy Policy</Link>
                 </div>
               </>
             ) : null}
